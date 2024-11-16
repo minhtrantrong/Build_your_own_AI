@@ -52,7 +52,8 @@ window = tk.Tk()
 window.title("Chatbot")
 
 # Create the chat history box
-chat_history = scrolledtext.ScrolledText(window, wrap=tk.WORD, height=40)
+# chat_history = scrolledtext.ScrolledText(window, wrap=tk.WORD, height=40)
+chat_history = scrolledtext.ScrolledText(window, wrap=tk.WORD, height=40, font=("Arial", 14))
 chat_history.pack()
 chat_history.config(state=tk.DISABLED)
 
