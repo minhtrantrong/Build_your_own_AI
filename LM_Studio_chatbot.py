@@ -1,14 +1,12 @@
 import tkinter as tk
 from tkinter import scrolledtext
 from tkinter import messagebox
-from openai import OpenAI
+import openai
 
 # Put your URI end point:port here for your local inference server (in LM Studio) 
-client = OpenAI(
-    base_url='http://localhost:1234/v1',
-    # Define the API key, required but ignored
-    api_key='',
-)
+openai.api_base='http://localhost:1234/v1'
+# Put in an empty API Key
+openai.api_key=''
 
 # Adjust the following based on the model type
 # Alpaca style prompt format:
@@ -24,12 +22,12 @@ def get_completion(prompt, model="local model", temperature=0.0):
     formatted_prompt = f"{prefix}{prompt}{suffix}"
     messages = [{"role": "user", "content": formatted_prompt}]
     # print(f'\nYour prompt: {prompt}\n')
-    response = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
         temperature=temperature
     )
-    return response.choices[0].message.content
+    return response.choices[0].message["content"]
 
 
 def send_message():
